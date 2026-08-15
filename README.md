@@ -1,3 +1,6 @@
+[![Go Test Status](https://github.com/SunMaungOo/task-runner-auth/actions/workflows/go-test-ci.yaml/badge.svg)](https://github.com/SunMaungOo/task-runner-auth/actions/workflows/go-test-ci.yaml/badge.svg)
+
+
 # Overview
 
 Authentication service for task-runner.
