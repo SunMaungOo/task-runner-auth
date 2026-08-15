@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set Short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag sunmaungoo/task-runner-auth:${{ steps.vars.outputs.sha_short }}
+
+      - name: Push image to docker hub
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PAT }}" | docker login -u sunmaungoo --password-stdin
+          docker push sunmaungoo/task-runner-auth:${{ steps.vars.outputs.sha_short }}
